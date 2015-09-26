@@ -29,8 +29,8 @@
 
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 20.9538989, lng: -21.1521341},
-    zoom: 3,
+    center: {lat: 33.7762331, lng: -84.3966605},
+    zoom: 17,
   });
   var geocoder = new google.maps.Geocoder();
 
