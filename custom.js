@@ -12,13 +12,3 @@ window.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-
-function updateLocation(coordinates) {
-  // alert(coordinates);
-  var locationsRef = ref.child("locations");
-  locationsRef.set({
-    city: {
-      location: coordinates,
-    }
-  });
-}
