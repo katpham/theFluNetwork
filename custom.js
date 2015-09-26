@@ -1,14 +1,40 @@
-var ref = new Firebase("https://the-flu-network.firebaseio.com");
+var firebaseRef = new Firebase("https://the-flu-network.firebaseio.com");
 
-window.addEventListener("DOMContentLoaded", function () {
-  var form = document.getElementById("input_form");
-  document.getElementById("submit_form").addEventListener("click", function () {
-    form.submit();
-    ref.set({
-      firstName: document.getElementById("first_name"),
-      lastName: document.getElementById("last_name"),
-      password: document.getElementById("password"),
-      email: document.getElementById("email"),
-    });
+$("#submit-btn").bind("click", function() {
+  var first_name = $('#first_name').val();
+  var last_name = $('#last_name').val();
+  var passwordValue = $('#password').val();
+  var emailValue = $('#email').val();
+  fireBaseRef.push({firstName: first_name, lastName: last_name, password: passwordValue, email: emailValue}, function(error) {
+    if (error !== null) {
+      alert('Unable to push comments to Firebase!');
+    }
   });
+
+    // var comment = $("#comments");
+    // var commentValue = $.trim(comment.val());
+ 
+    // fireBaseRef.push({comment: commentValue}, function(error) {
+    //     if (error !== null) {
+    //         alert('Unable to push comments to Firebase!');
+    //     }
+    // });
+ 
+    return false;
 });
+
+// function submit(e) {
+//   var first_name = $('#first_name').val();
+//   var last_name = $('#last_name').val();
+//   var password = $('#password').val();
+//   var email = $('#email').val();
+//   firebaseRef.set({
+//     First_Name: first_name, 
+//     Last_Name: last_name, 
+//     Password: password,
+//     Email: email
+//   });
+//   e.preventDefault();
+// }
+// var submit = document.getElementsByTagName('button')[0];
+// submit.onclick = submit;
