@@ -1,23 +1,28 @@
+// var myDataRef = new Firebase('https://the-flu-network.firebaseio.com/');
 
-// var req = new XMLHttpRequest();  
-// req.open('GET', 'http://http://m.gatech.edu/w/gtplaces/c/api/buildings', false);   
-// req.send(null);  
-// if(req.status == 200)  
-//    dump(req.responseText);
+// document.getElementById('gtbuildings').onchange = function(){
 
-// var request = require('request');
-// var cheerio = require('cheerio');
+//   var file = this.files[0];
 
-// request('https://news.ycombinator.com', function (error, response, html) {
-//   if (!error && response.statusCode == 200) {
-//     console.log(html);
-//   }
-// });
+//   var reader = new FileReader();
+//   reader.onload = function(progressEvent){
+//     // Entire file
+//     // console.log(this.result);
 
+//     // By lines
+//     // var lines = this.result.split('},{');
 
+//     var buildingArray = JSON.parse(this.result);
+// 	for (var i=0; i < buildingArray.length; i++) {
+// 		var buildingName = buildingArray[i]["name"];
+// 		var latitude = buildingArray[i]["latitude"];
+// 		var longitude = buildingArray[i]["longitude"];
+// 		var location = latitude + ", " + longitude;
+// 		// console.log(buildingName + ", " + latitude + ", " + longitude);
+// 		myDataRef.push({name: buildingName, text: location});
+// 	}
 
-// jQuery.get('http://localhost/MVC/gtbuildings.html', function(data) {
-// var myvar = data;
-// });
+//   };
+//   reader.readAsText(file);
+// };
 
-window.alert('blah');
