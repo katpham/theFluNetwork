@@ -16,13 +16,13 @@
 	  <title>The Flu Network</title>
   </head>
   <body>
-  	<div id="control" style="overflow-y:auto; max-height: 100%;" class="blue-grey lighten-5">
+  	<div id="control" style="overflow-y:auto; max-height: 100%; height:100vh;" class="blue-grey lighten-5">
   		
 			<img src="wan.png" style="width: 100%">
       <h5 style="padding-left: 15px">The Flu Network</h5>			
 			<p style="padding-left: 15px">Crowd Sourced Disease Tracking</p>
 			
-			<div class="row">
+			<div class="row" style="width: 100%">
 		    <div class="col s12">
 		      <ul class="tabs">
 		        <li class="tab col s6 grey lighten-4"><a class="active" href="#test1">Summary</a></li>
@@ -82,18 +82,8 @@
 		    <div id="test2" class="col s12">
 					<div class="row" style="padding-top:10px">
 					    <form class="col s12" method="get" action="javascript:addToDatabase();">
-					      <div class="row">
-					        <div class="input-field col s6">
-					          <input id="first_name" type="text" class="validate">
-					          <label for="first_name">First Name</label>
-					        </div>
-					        <div class="input-field col s6">
-					          <input id="last_name" type="text" class="validate">
-					          <label for="last_name">Last Name</label>
-					        </div>
-					      </div>
 					            <!-- dropdown location div -->
-					      <div class="row select_menu location-content">
+					      <div class="row select_menu location-content" style="padding-top: 5px">
 					      </div>
 
 					       <!-- dropdown severity div -->
@@ -104,16 +94,10 @@
 						    </p>
 					      </div>
 					       
-					 
+								<button id="submit-btn" class="btn waves-effect waves-light" type="submit" name="action">Submit
+							    <i class="material-icons right">send</i>
+							  </button>
 
-					      <div class="fixed-action-btn" style="bottom: 20px; right: 24px;">
-						    	<a class="btn-floating btn waves-effect waves-light teal lighten-1"><i class="material-icons">add</i></a>
-						    </div>	
-
-
-						    <button id="submit-btn" style="margin-left:25px" class="submit btn waves-effect waves-light" type="submit" name="action">Submit
-                			<i class="material-icons right">send</i>
-              				</button>
 					    </form>
 					  </div>
 		    </div>
