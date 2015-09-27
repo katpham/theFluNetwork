@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="test.css">
+    <!--Import Google Icon Font-->
+	  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <!--Import materialize.css-->
+	  <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+
+	  <title>The Flu Network</title>
+  </head>
+  <body>
+  	<div id="control" class="grey lighten-4">
+  		
+			<img src="wan.png" style="width: 100%">
+      <h5 style="padding-left: 15px">The Flu Network</h5>			
+			<p style="padding-left: 15px">Crowd Sourced Disease Tracking</p>
+			
+			<div class="row">
+		    <div class="col s12">
+		      <ul class="tabs">
+		        <li class="tab col s6"><a class="active" href="#test1">Summary</a></li>
+		        <li class="tab col s6"><a href="#test2">Add Record</a></li>
+		      </ul>
+		    </div>
+		    <div id="test1" class="col s12">
+					<table>
+		        <thead>
+		          <tr>
+		              <th data-field="id">Building</th>
+		              <th data-field="risk">Risk</th>
+		          </tr>
+		        </thead>
+
+		        <tbody>
+		          <tr>
+		            <td>North Avenue West</td>
+		            <td>None</td>
+		          </tr>
+		          <tr>
+		            <td>Klaus</td>
+		            <td>High</td>
+		          </tr>
+		          <tr>
+		            <td>McCamish Pavilion</td>
+		            <td>Low</td>
+		          </tr>
+		          <tr>
+		            <td>Ajax Building</td>
+		            <td>Low</td>
+		          </tr>
+		          <tr>
+		            <td>Kappa Sigma</td>
+		            <td>High</td>
+		          </tr>
+		          <tr>
+		            <td>Pi Kappa Alpha</td>
+		            <td>High</td>
+		          </tr>
+		        </tbody>
+		      </table>
+
+		    </div>
+		    <div id="test2" class="col s12">
+					<div class="row" style="padding-top:10px">
+					    <form class="col s12">
+					      <div class="row">
+					        <div class="input-field col s6">
+					          <input id="first_name" type="text" class="validate">
+					          <label for="first_name">First Name</label>
+					        </div>
+					        <div class="input-field col s6">
+					          <input id="last_name" type="text" class="validate">
+					          <label for="last_name">Last Name</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <input id="building" type="text" class="validate">
+					          <label for="building">Building</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <input id="severity" type="text" class="validate">
+					          <label for="severity">Severity</label>
+					        </div>
+					      </div>
+					      <div class="fixed-action-btn" style="bottom: 20px; right: 24px;">
+						    	<a class="btn-floating btn waves-effect waves-light teal lighten-1"><i class="material-icons">add</i></a>
+						    </div>	
+					    </form>
+					  </div>
+		    </div>
+		  </div>
+			
+		</div>
+    <div id="map"></div>
+    <div id="legend">
+		  Risk Level
+		</div>
+
+
+		<!-- Javascript calls -->
+    <script type="text/javascript" src="test.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlbBifASt5i7y3DqylrjqKhn8kexNzxWk&callback=initMap">
+    </script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+  </body>
+</html>
