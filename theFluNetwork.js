@@ -1,5 +1,5 @@
 // var myDataRef = new Firebase('https://the-flu-network.firebaseio.com/');
-var myDataRef = new Firebase('https://brih6mr7egw.firebaseio-demo.com/');
+var myDataRef = new Firebase('https://the-floo-network.firebaseio.com/');
 // document.getElementById('gtbuildings').onchange = function(){
 
 //   var file = this.files[0];
@@ -53,13 +53,13 @@ function addToDatabase() {
 	myDataRef.once("value", function(snapshot) {
 		var data = snapshot.val();
 		for (var i in data) {
-			var buildingData = data[i];
-			if (location === buildingData['name']) {
+			// var buildingData = data[i];
+			// if (location === buildingData['name']) {
 				uniqueKey = i;
-				newCount = buildingData['count'] + 1;
-				updatedUrl = 'https://brih6mr7egw.firebaseio-demo.com/' + uniqueKey; 
+				// newCount = buildingData['count'] + 1;
+				updatedUrl = 'https://brih6mr7egw.firebaseio-demo.com/' + uniqueKey + '/severity'; 
 		  		updateRef = new Firebase(updatedUrl);
-		  		updateRef.child('count').set(newCount);
+		  		updateRef.child('severity').set(0);
 			}
 		}
 		if (uniqueKey == null) {
@@ -151,7 +151,6 @@ function addToDatabase() {
 
          	}
     	}); //end ajax
-        // });
     });
 
 
