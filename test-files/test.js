@@ -112,7 +112,7 @@ function addToDatabase() {
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 33.7763848, lng: -84.3985951},
+    center: {lat: 33.7764116, lng: -84.3985951},
     zoom: 16,
   });
 
