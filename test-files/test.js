@@ -1,6 +1,6 @@
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 33.7763848, lng: -84.3984951},
+    center: {lat: 33.7763848, lng: -84.3985951},
     zoom: 16,
   });
 
@@ -470,38 +470,50 @@ function initMap() {
   // For each place, get the icon, name and location.
   // Loop through our array of mymarkers & place each one on the map  
   for(i = 0; i < mymarkers.length; i++ ) {
+  	var infoWindow = new google.maps.InfoWindow({
+  		content: infoWindowContent[i]
+  	});
+
   	var position = new google.maps.LatLng(mymarkers[i][1], mymarkers[i][2]);
     var indicator = Math.random() * 100;
     var randomized;
+
     if (indicator < 25) randomized = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
     else if (indicator < 50) randomized = 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
     else if (indicator < 75) randomized = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
     else randomized = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+
     marker = new google.maps.Marker({
         position: position,
         map: map,
         title: mymarkers[i][0],
         icon: randomized
     });
+    // marker.addListener('hover', openInfo(infoWindow));
+
+    google.maps.event.addListener(marker,'click', (openInfoContent(marker, i, infowindow))(marker,content,infowindow));  
 		marker.setMap(map);
-
-		// Allow each marker to have an info window    
-    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-      return function() {
-          infoWindow.setContent(infoWindowContent[i][0]);
-          infoWindow.open(map, marker);
-      };
-    })(marker, i));
-
   }
-
-  // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
-  var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-      this.setZoom(16);
-      google.maps.event.removeListener(boundsListener);
-  });
 }
 
+function openInfoContent(marker, i, infowindoww) {
+	return function() {
+		infowindow.setContent(infoWindow[i]);
+		infowindow.open(map, marker);
+	};
+}
+
+function openInfo(infoWindow) {
+	infoWindow.open(map, marker);
+}
+
+// Allow each marker to have an info window    
+google.maps.event.addListener(marker, 'click', (function(marker, i) {
+  return function() {
+      infoWindow.setContent(infoWindowContent[i][0]);
+      infoWindow.open(map, marker);
+  };
+})(marker, i));
 
 
 function Legend(controlDiv, map) {

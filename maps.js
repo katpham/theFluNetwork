@@ -11,7 +11,7 @@ function initAutocomplete() {
 
 
   // Multiple Markers
-  var markers = [
+  var mymarkers = [
 		["Howell Residence Hall", 33.7721, -84.3909],
 		["Crosland Tower", 33.7742, -84.3953],
 		["Georgia Tech Alumni House", 33.7713, -84.3939],
@@ -447,14 +447,14 @@ function initAutocomplete() {
 		['<div class="info_content">' + '<h3>Weber Space Science and Technology Building II - (SST)</h3>' + '</div>'],
   ];
 
-  // Display multiple markers on a map
+  // Display multiple mymarkers on a map
   var infoWindow = new google.maps.InfoWindow(), marker, i;
 
-  // Loop through our array of markers & place each one on the map  
-  for(i = 0; i < markers.length; i++ ) {
+  // Loop through our array of mymarkers & place each one on the map  
+  for(i = 0; i < mymarkers.length; i++ ) {
   		marker=new google.maps.Marker({
-  			position:{lat: markers[i][1], lng: markers[i][2]},
-  			title: markers[i][0]
+  			position:{lat: mymarkers[i][1], lng: mymarkers[i][2]},
+  			title: mymarkers[i][0]
   		});
 
   		// // Allow each marker to have an info window    
@@ -521,7 +521,7 @@ function initAutocomplete() {
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
 
-    if (places.length == 0) {
+    if (places.length === 0) {
       return;
     }
 
@@ -584,3 +584,27 @@ var myDataRef = new Firebase('https://brih6mr7egw.firebaseio-demo.com/');
   		console.log("The read failed: " + errorObject.code);
   });
 // }
+
+$(document).ready(function(){
+    window.alert('varun');
+
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+
+    // Initialize collapse button
+  $(".button-collapse").sideNav();
+  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+  //$('.collapsible').collapsible();
+
+// $('#modal1').openModal();
+
+  $('.modal-trigger').leanModal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: 0.5, // Opacity of modal background
+      in_duration: 300, // Transition in duration
+      out_duration: 200, // Transition out duration
+      ready: function() { alert('Ready'); }, // Callback for Modal open
+      complete: function() { alert('Closed'); } // Callback for Modal close
+    }
+  );
+});
