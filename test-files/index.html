@@ -9,15 +9,18 @@
     <!--Let browser know website is optimized for mobile-->
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
 
-	    <!-- Firebase -->
-      <script src="https://cdn.firebase.com/js/client/2.3.0/firebase.js"></script>
-      <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.3.0/firebase.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link href="../select2/dist/css/select2.min.css" rel="stylesheet" />
+		<script src="../select2/dist/js/select2.min.js"></script>
 
 	  <title>The Flu Network</title>
   </head>
+
   <body>
+
   	<div id="control" style="overflow-y:auto; max-height: 100%; height:100vh;" class="blue-grey lighten-5">
-  		
 			<img src="wan.png" style="width: 100%">
       <h5 style="padding-left: 15px">The Flu Network</h5>			
 			<p style="padding-left: 15px">Crowd Sourced Disease Tracking</p>
@@ -79,19 +82,40 @@
 		      </table>
 
 		    </div>
-		    <div id="test2" class="col s12">
-					<div class="row" style="padding-top:10px">
-					    <form class="col s12" method="get" action="javascript:addToDatabase();">
-					            <!-- dropdown location div -->
-					      <div class="row select_menu location-content" style="padding-top: 5px">
-					      </div>
 
-					       <!-- dropdown severity div -->
+		    <div id="test2" class="col s12">
+					<!-- <div class="row" style="padding-top:10px"> -->
+					    <form class="col s12" method="get" action="javascript:addToDatabase();" style="padding-top:15px">
+
+								<div style="width:273px; padding-top:15px;">
+									<select class="building-locations" style="width:273px;">
+						      	<option value="3620194" selected="selected">Search for a Building</option>
+						      </select>
+								</div>
+						      
+								<div style="width:273px; padding-top:15px;">
+									<select class="browser-default">
+							      <option value="" disabled selected>Search for a Disease</option>
+							      <option value="1">Bed Bugs</option>
+							      <option value="2">Chicken Pox</option>
+							      <option value="3">Common Cold</option>
+							      <option value="4">Ebola</option>
+							      <option value="5">Flu</option>
+							      <option value="6">Herpes</option>
+							      <option value="7">Food Poisoning</option>
+							      <option value="8">Mononucleosis</option>
+							      <option value="9">Strep Throat</option>
+							    </select>
+								</div>
+							    
+
+
+					      <!-- dropdown severity div -->
 					      <div id="severity-content" class="row select_menu severity-content">
 					      	<p class="range-field">
 					      		<label for="severity">Severity Level</label>
-						    <input id="severity_slider" type="range" min="0" max="10" val=""/>
-						    </p>
+						    		<input id="severity_slider" type="range" min="0" max="10" val=""/>
+						    	</p>
 					      </div>
 					       
 								<button id="submit-btn" class="btn waves-effect waves-light" type="submit" name="action">Submit
@@ -99,10 +123,11 @@
 							  </button>
 
 					    </form>
-					  </div>
+					  <!-- </div> -->
 		    </div>
 		  </div>
 		</div>
+
     <div id="map"></div>
 
 
@@ -113,7 +138,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlbBifASt5i7y3DqylrjqKhn8kexNzxWk&callback=initMap">
     </script>
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    
     <script type="text/javascript" src="../js/materialize.min.js"></script>
   </body>
 </html>
