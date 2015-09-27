@@ -13,6 +13,8 @@
 
       <!-- Firebase -->
       <script src="https://cdn.firebase.com/js/client/2.3.0/firebase.js"></script>
+      <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+ 
     </head>
 
     <body>
@@ -32,8 +34,8 @@
       <!-- side nav -->
       <nav>
         <div id="slide-out" class="side-nav">
-          <div class="row">
-            <form id="inputForm" action="javascript:addToDatabase();" class="col s12">
+          <div class="row black-text">
+            <form id="inputForm" method="get" action="javascript:addToDatabase();" class="col s12">
               <div class="row">
                 <div class="input-field col s6">
                   <input id="first_name" type="text" class="">
@@ -44,12 +46,8 @@
                   <label class="active" for="last_name">Last Name</label>
                 </div>
               </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="location" type="text" class="">
-                  <label class="active" for="location">Location</label>
-                </div>
-              </div>
+
+
               <div class="row">
                 <div class="input-field col s12">
                   <input id="email" type="email" class="">
@@ -57,7 +55,7 @@
                 </div>
               </div>
 
-              <button id="submit-btn" style="margin-left:25px" class="btn waves-effect waves-light" type="submit" name="action">Submit
+              <button id="submit-btn" style="margin-left:25px" class="submit btn waves-effect waves-light" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>
               </button>
             </form>
@@ -67,39 +65,15 @@
       </nav>
       <!-- end side nav -->
 
-
-			<div class="row">
-		    <form id="inputForm" action="javascript:addToDatabase();" class="col s12">
-		      <div class="row">
-		        <div class="input-field col s6">
-		          <input id="first_name" type="text" class="validate">
-		          <label for="first_name">First Name</label>
-		        </div>
-		        <div class="input-field col s6">
-		          <input id="last_name" type="text" class="validate">
-		          <label for="last_name">Last Name</label>
-		        </div>
-		      </div>
-		      <div class="row">
-		        <div class="input-field col s12">
-		          <input id="location" type="text" class="validate">
-		          <label for="location">Location</label>
-		        </div>
-		      </div>
-		      <div class="row">
-		        <div class="input-field col s12">
-		          <input id="email" type="email" class="validate">
-		          <label for="email">Email</label>
-		        </div>
-		      </div>
-
-          <button id="submit-btn" style="margin-left:25px" class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
-          </button>
-		    </form>
-		  </div>
-
-
+      <!-- dropdown div -->
+      <div class="row select_menu">
+                <p>Hello there</p>
+                <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
+      </div>
+       
+      <!-- the dropdown content -->
+      <ul id='dropdown1' class='dropdown-content'>
+      </ul>
 
       <!-- Side NavBar Button -->
       <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
@@ -138,6 +112,7 @@
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="theFluNetwork.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
+
 
     </body>
   </html>
