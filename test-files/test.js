@@ -1,17 +1,20 @@
 var myDataRef = new Firebase('https://the-floo-network.firebaseio.com/');
+var severity = 0;
+var locat;
+
+$('#severity_slider').change(function(){
+	    severity = (this.value);
+	});
 
 //add to database
-var locat;
+
 function addToDatabase() {
 	var first_name = $('#first_name').val();
 	var last_name = $('#last_name').val();
-	var severity = document.getElementById("severity_slider"); //$('.severity_content');
-	console.log(severity);
-	// var email = $('#email').val();
-	// var location = $( ".location_select option:selected" ).text();
-	// var location = $('.dropdown-content li')[0].attributes.name.value;
-	console.log('loc: ' + locat);
 
+	// console.log(severity);
+
+	// console.log('loc: ' + locat);
 
 	var buildingData;
 	var newCount = 0;
@@ -39,8 +42,7 @@ function addToDatabase() {
 
 		$('#first_name').val("");
 		$('#last_name').val("");
-		// $('#email').val("");
-		// $('#location').val("");
+
   	}, function (errorObject) {
   		console.log("The read failed: " + errorObject.code);
   	});
@@ -86,28 +88,9 @@ function addToDatabase() {
             	});
             	
 
-            	// $('.location-content li').click(function(e) {
-            	// 	console.log($(this)[0].attributes.name.value);
-            	// 	locat = $(this)[0].attributes.name.value;
-
-            	// 	console.log($('a.location-button').html(locat));
-            	
-            	// });
-
          	}
     	}); //end ajax
     });
-
-
-	$(document).ready(function() {
-		$('.location-content li').click(function(e) {
-            console.log($(this)[0].attributes.name.value);
-         	console.log('yeah');
-        // $('dropdown-button').html(locat);
-            	
-        });
-
-	});
 
 
 function initMap() {
