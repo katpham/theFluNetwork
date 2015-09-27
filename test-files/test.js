@@ -3,8 +3,8 @@ var severity = 0;
 var locat;
 
 $('#severity_slider').change(function(){
-	    severity = (this.value);
-	});
+  severity = (this.value);
+});
 
 //add to database
 
@@ -52,46 +52,232 @@ function addToDatabase() {
     	location.reload();
     });
 }
-	//get building dropdowns
-	var arr = [];
-    $(document).ready(function() {
-    	var options = '<select class="browser-default location_select"><option value="" disabled selected>Select a Building</option>';
 
-    	//start ajax request
-    	$.ajax({
-        	url: "http://m.gatech.edu/w/gtplaces/c/api/buildings",
-        	//force to handle it as text
-        	dataType: "text",
-        	success: function(data) {
-            	//data downloaded so we call parseJSON function 
-            	//and pass downloaded data
-            	//now json variable contains data in json format
-            	//let's display a few items
 
-            	var json = JSON.parse(data);
-            	for (var i in json) {
-            	    arr.push(json[i].name);
-            	}
-            	arr.sort();
-            	for (var i in arr) {
-            	    options += '<option value="i"' + '">' + arr[i] + '</option>';
-            	}
-            	options += '</select>';
-            	// console.log(options);
 
-            	$('.location-content').html(options);
 
-            	// //get selected list item
-            	$('.location_select').change(function() {
-            		console.log($('.location_select option:selected').text());
-            		locat = $('.location_select option:selected').text();
-            	});
-            	
+  $(document).ready(function() {
+		$(".browser-default").select2();
+  });
 
-         	}
-    	}); //end ajax
-    });
 
+
+// Multiple Markers
+var names = [
+	["Howell Residence Hall"],
+	["Crosland Tower"],
+	["Georgia Tech Alumni House"],
+	["Montgomery-Knight Building"],
+	["Boggs Building"],
+	["Wenn Student Center"],
+	["Commander Building"],
+	["Fulmer Residence Hall"],
+	["Hefner Residence Hall"],
+	["Armstrong Residence Hall"],
+	["Caldwell Residence Hall"],
+	["Harris Residence Hall"],
+	["Folk Residence Hall"],
+	["Mason Civil Engineering Building"],
+	["Central Receiving-Property Control"],
+	["Stamps Student Center Commons"],
+	["Couch Building"],
+	["Woodruff Residence Hall"],
+	["Freemen Residence Hall"],
+	["Montag Residence Hall"],
+	["Fitten Residence Hall"],
+	["Brittain Dining Hall"],
+	["Alpha Phi Omega"],
+	["Campus Recreation Center"],
+	["Smithgall Student Services Building"],
+	["Ferst Center for the Arts"],
+	["Southern Regional Education Board"],
+	["Manufacturing Research Center - (MARC)"],
+	["Fiber Optic Network Building"],
+	["Center for Assistive Technology and Environmental Access"],
+	["Institute of Paper Science and Technology"],
+	["Cloudman Residence Hall"],
+	["8th St Apartments"],
+	["Hemphill Avenue Apartments"],
+	["Center Street Apartments"],
+	["Jack C. Stein House (Fourth St)"],
+	["Manufacturing Related Disciplines Complex - (MRDC)"],
+	["GTRI (Callaway Building)"],
+	["Ivan Allen College (Habersham)"],
+	["Office of Information Technology"],
+	["Harrison Residence Hall"],
+	["Aquatic Center"],
+	["Office of Human Resources"],
+	["J. Erskine Love Manufacturing Building"],
+	["Lamar Allen Sustainable Education Building"],
+	["Parker H. Petit Biotechnology Building (IBB)"],
+	["Ford Motor Company Environmental Science and Technology (ES&T)"],
+	["Structural Engineering and Materials Research"],
+	["Towers Residence Hall"],
+	["Aerospace Engineering Combustion Lab"],
+	["Broadband Institute Residential Laboratory, Aware Home"],
+	["Christopher W. Klaus Advanced Computing Building"],
+	["Engineer's Bookstore"],
+	["Research Administration"],
+	["Office of Information Technology (OIT)"],
+	["Advanced Wood Products"],
+	["Food Processing Technology Research"],
+	["Glenn Residence Hall"],
+	["Campus Recreation Center"],
+	["Marcus Nanotechnology Building"],
+	["Business Services"],
+	["UA Whitaker Building"],
+	["Clough Undergraduate Learning Commons "],
+	["Molecular Science and Engineering (MoSE or MSE)"],
+	["Bobby Dodd Stadium"],
+	["Global Learning & Conference Center"],
+	["Georgia Tech Hotel and Conference Center"],
+	["College of Management and Barnes & Noble Bookstore"],
+	["Economic Development Building (EDB)"],
+	["Technology Square Research Building"],
+	["Centergy One"],
+	["Student Health Center"],
+	["Health Systems Institute"],
+	["Georgia Tech Yellow Jacket Ticketing Office"],
+	["J.C. Shaw Sports Complex; Athletic Association"],
+	["Edge Athletic Center"],
+	["Family Apartments"],
+	["Marcus Nanotechnology"],
+	["Rice Center for Sports Performance"],
+	["North Avenue East"],
+	["North Avenue North"],
+	["North Avenue South"],
+	["North Avenue West"],
+	["Academy of Medicine"],
+	["Skiles Classroom Building"],
+	["Brock, Mary R. & John F. Football Practice Facility"],
+	["Challenge Course Pavilion"],
+	["Daniel Laboratory"],
+	["Army Office"],
+	["Army Armory"],
+	["Smith Building"],
+	["Chapin Building"],
+	["Holland Building"],
+	["Lyman Hall Building"],
+	["W.H.Emerson Building"],
+	["Alumni House"],
+	["A. French Building"],
+	["Alpha Epsilon Pi"],
+	["Alpha Tau Omega"],
+	["Beta Theta Pi"],
+	["Chi Phi"],
+	["Chi Psi"],
+	["Delta Sigma Phi"],
+	["Delta Tau Delta"],
+	["Delta Upsilon"],
+	["Bill Moore Student Success Center"],
+	["Kappa Alpha"],
+	["Kappa Sigma"],
+	["Lambda Chi Alpha"],
+	["Phi Delta Theta"],
+	["Phi Gamma Delta"],
+	["Phi Kappa Sigma"],
+	["Phi Kappa Tau"],
+	["Phi Kappa Theta"],
+	["Phi Mu Sorority"],
+	["Phi Sigma Kappa"],
+	["Facilities"],
+	["Pi Kappa Alpha"],
+	["Psi Upsilon"],
+	["Alpha Xi Delta"],
+	["Sigma Alpha Epsilon"],
+	["Sigma Chi"],
+	["Sigma Nu"],
+	["Sigma Phi Epsilon"],
+	["Tau Kappa Epsilon"],
+	["Theta Chi"],
+	["Theta Xi"],
+	["O'Keefe Main Building"],
+	["Zeta Beta Tau"],
+	["Alpha Chi Omega"],
+	["Christian Campus Fellowship"],
+	["Alpha Gamma Delta"],
+	["Alpha Delta Pi"],
+	["Delta Chi"],
+	["Pi Kappa Phi"],
+	["Alpha Delta Chi"],
+	["Zeta Tau Alpha"],
+	["Baptist Student Union"],
+	["O'Keefe Gym"],
+	["Custodial Services Building"],
+	["Catholic Center"],
+	["Griffin Track"],
+	["Lutheran Center"],
+	["Wesley Foundation/Methodist Center"],
+	["Vernon D. and Helen D. Crawford Pool"],
+	["Westminster Christian Fellowship"],
+	["Rose Bowl Field"],
+	["SAC Fields"],
+	["Alumni Park"],
+	["Administration Building"],
+	["Tech Tower Lawn"],
+	["Harrison Square"],
+	["Carnegie Building"],
+	["Savant Building"],
+	["Swann Building"],
+	["Guggenheim Building"],
+	["Engineering Science and Mechanics (ESM) Building"],
+	["Coon Building"],
+	["Beringause Building"],
+	["Wardlaw Center"],
+	["Mechanical Engineering Research Building"],
+	["College of Computing"],
+	["Hinman Research Building"],
+	["Rich Building"],
+	["Graduate Living Center"],
+	["Instructional Center - (IC)"],
+	["Groseclose Building"],
+	["School of Industrial and Systems Engineering"],
+	["Old CE"],
+	["Navy ROTC Armory"],
+	["Smith Residence Hall"],
+	["Building Construction and Center for GIS (Arch Annex)"],
+	["GTRI research"],
+	["Undergraduate Living Center - (ULC)"],
+	["Maulding Residence Hall (6th St E Apartments)"],
+	["Cherry Emerson Building"],
+	["Chandler Stadium"],
+	["Brown Residence Hall"],
+	["Tenth&Home"],
+	["Presidents House"],
+	["Paul Heffernan House"],
+	["Alexander Memorial Coliseum"],
+	["Georgia Tech Water Sports"],
+	["Luck Building"],
+	["Facilities"],
+	["Junior's Grill"],
+	["College of Architecture-West Wing"],
+	["College of Architecture"],
+	["Library and Information Center"],
+	["Centennial Research Building"],
+	["R. Kirk Landon Learning Center"],
+	["Bill Moore Tennis Center"],
+	["Howey-Physics Building and Observatory"],
+	["King Facilities Building"],
+	["Weber Space Science and Technology Building I - (SST)"],
+	["Van Leer EE/CmpE Building"],
+	["CEISMC"],
+	["Bunger-Henry Building"],
+	["EII 512 Means St"],
+	["Neely Nuclear Research Center"],
+	["Athletic Association Conference Room"],
+	["Field Residence Hall"],
+	["Matheson Residence Hall"],
+	["Perry Residence Hall"],
+	["Hanson Residence Hall"],
+	["Hopkins Residence Hall"],
+	["Pettit Microelectronics Research Center (MIRC)"],
+	["Ajax Building"],
+	["Weber Space Science and Technology Building II - (SST)"]
+];
+
+$(".building-locations").select2({
+  data: names
+});
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
