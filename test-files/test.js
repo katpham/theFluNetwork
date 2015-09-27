@@ -1,3 +1,109 @@
+var myDataRef = new Firebase('https://the-floo-network.firebaseio.com/');
+
+
+//add to database
+var locat;
+function addToDatabase() {
+	var first_name = $('#first_name').val();
+	var last_name = $('#last_name').val();
+	var severity = $('#severity').val();
+	// var email = $('#email').val();
+	// var location = $( ".location_select option:selected" ).text();
+	// var location = $('.dropdown-content li')[0].attributes.name.value;
+	console.log('loc: ' + locat);
+
+
+	var buildingData;
+	var newCount = 0;
+	
+	var uniqueKey;
+	var updatedUrl;
+	var updateRef;
+
+	myDataRef.once("value", function(snapshot) {
+		var data = snapshot.val();
+		for (var i in data) {
+			var buildingData = data[i];
+			if (locat === buildingData['name']) {
+				uniqueKey = i;
+				newCount = buildingData['count'] + 1;
+				updatedUrl = 'https://the-floo-network.firebaseio.com/' + uniqueKey; 
+		  		updateRef = new Firebase(updatedUrl);
+		  		updateRef.child('count').set(newCount);
+		  		updateRef.child('severity').set(severity);
+			}
+		}
+		if (uniqueKey == null) {
+			// window.alert("Building does not exist.");
+		}
+
+		$('#first_name').val("");
+		$('#last_name').val("");
+		// $('#email').val("");
+		// $('#location').val("");
+  	}, function (errorObject) {
+  		console.log("The read failed: " + errorObject.code);
+  	});
+
+  	$('#PageRefresh').click(function() {
+
+    	location.reload();
+    });
+}
+	//get building dropdowns
+	var arr = [];
+    $(document).ready(function() {
+    	var options = '';
+
+    	//start ajax request
+    	$.ajax({
+        	url: "http://m.gatech.edu/w/gtplaces/c/api/buildings",
+        	//force to handle it as text
+        	dataType: "text",
+        	success: function(data) {
+            	//data downloaded so we call parseJSON function 
+            	//and pass downloaded data
+            	//now json variable contains data in json format
+            	//let's display a few items
+
+            	var json = JSON.parse(data);
+            	for (var i in json) {
+            	    arr.push(json[i].name);
+            	}
+            	arr.sort();
+            	for (var i in arr) {
+            	    options += '<li class="collection-item" name="' +arr[i] + '">' + arr[i] + '</li>';
+            	}
+            	options += '</ul>';
+            	// console.log(options);
+
+            	$('.location-content').html(options);
+
+            	// //get selected list item
+            	$('.location-content li').click(function(e) {
+            		console.log($(this)[0].attributes.name.value);
+            		locat = $(this)[0].attributes.name.value;
+
+            		console.log($('a.location-button').html(locat));
+            	
+            	});
+
+         	}
+    	}); //end ajax
+    });
+
+
+	$(document).ready(function() {
+		$('.location-content li').click(function(e) {
+            console.log($(this)[0].attributes.name.value);
+         	console.log('yeah');
+        // $('dropdown-button').html(locat);
+            	
+        });
+
+	});
+
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 33.7764116, lng: -84.3985951},
@@ -489,7 +595,6 @@ function setMarkers(map, locations) {
     else if (indicator < 50) randomized = 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
     else if (indicator < 75) randomized = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
     else randomized = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-
 
 	  var marker = new google.maps.Marker({ 
 	  	map: map, 
