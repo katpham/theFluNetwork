@@ -29,11 +29,19 @@ var myDataRef = new Firebase('https://brih6mr7egw.firebaseio-demo.com/');
 // Initialize collapse button
   // $(".button-collapse").sideNav();
 
+ //  $('.select2').select2({
+	//   placeholder: "Select a state"
+	// });
+
+
+var locat;
 function addToDatabase() {
 	var first_name = $('#first_name').val();
 	var last_name = $('#last_name').val();
 	var email = $('#email').val();
-	var location = $('#location').val();
+	// var location = $( ".location_select option:selected" ).text();
+	// var location = $('.dropdown-content li')[0].attributes.name.value;
+	console.log('loc: ' + locat);
 
 
 	var buildingData;
@@ -50,17 +58,26 @@ function addToDatabase() {
 				uniqueKey = i;
 				newCount = buildingData['count'] + 1;
 				updatedUrl = 'https://brih6mr7egw.firebaseio-demo.com/' + uniqueKey; 
-				console.log(newCount);
 		  		updateRef = new Firebase(updatedUrl);
 		  		updateRef.child('count').set(newCount);
 			}
 		}
 		if (uniqueKey == null) {
-			window.alert("Building does not exist.");
+			// window.alert("Building does not exist.");
 		}
+
+		$('#first_name').val("");
+		$('#last_name').val("");
+		$('#email').val("");
+		// $('#location').val("");
   	}, function (errorObject) {
   		console.log("The read failed: " + errorObject.code);
   	});
+
+  	$('#PageRefresh').click(function() {
+
+    	      location.reload();
+    	  });
 }
 
 	
@@ -77,22 +94,65 @@ function addToDatabase() {
 	// 	$('.button-collapse').onclick()
 	// }
 
+	//when + button is clicked
 	$('.fixed-action-btn').on('click', function(e) {
 		$('.button-collapse').sideNav({
 	      menuWidth: 350, // Default is 240
 	      closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
 	    });
 		$('.button-collapse').sideNav('show');
-		console.log('do');
 	});
 
 	$(document).ready(function(e) {
 		console.log($('.button-collapse').menuWidth);
 	}) 
+
+	$(".submit").click(function() {
+		$('.button-collapse').sideNav('hide');
+	});
+
+	$(document).ready(function() {
+	    $('select').material_select();
+	});
 	
+ 	var arr = [];
+    $(document).ready(function() {
+    	var options = '';
 
+    	//start ajax request
+    	$.ajax({
+        	url: "http://m.gatech.edu/w/gtplaces/c/api/buildings",
+        	//force to handle it as text
+        	dataType: "text",
+        	success: function(data) {
+            	//data downloaded so we call parseJSON function 
+            	//and pass downloaded data
+            	//now json variable contains data in json format
+            	//let's display a few items
 
+            	var json = JSON.parse(data);
+            	for (var i in json) {
+            	    arr.push(json[i].name);
+            	}
+            	arr.sort();
+            	for (var i in arr) {
+            	    options += '<li class="collection-item" name="' +arr[i] + '">' + arr[i] + '</li>';
+            	}
+            	options += '</ul>';
 
+            	$('.dropdown-content').html(options);
+
+            	// //get selected list item
+            	$('.dropdown-content li').click(function(e) {
+            		console.log($(this)[0].attributes.name.value);
+            		locat = $(this)[0].attributes.name.value;
+            	
+            	});
+
+         	}
+    	}); //end ajax
+        // });
+    });
 
 
 
