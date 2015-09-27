@@ -573,15 +573,22 @@ function initMap() {
   var legend = new Legend(legendDiv, map);
   legendDiv.index = 1;
   map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legendDiv);
-  // For each place, get the icon, name and location.
-  // Loop through our array of mymarkers & place each one on the map  
-  for(i = 0; i < mymarkers.length; i++ ) {
-  	var infoWindow = new google.maps.InfoWindow({
-  		content: infoWindowContent[i]
-  	});
 
-  	var position = new google.maps.LatLng(mymarkers[i][1], mymarkers[i][2]);
-    var indicator = Math.random() * 100;
+  setMarkers(map, mymarkers);
+
+}
+
+
+function setMarkers(map, locations) {
+	var infowindow = new google.maps.InfoWindow();
+	for (var i = 0; i < locations.length; i++) {  
+
+		var building = locations[i][0], latitude = locations[i][1], longitude = locations[i][2];
+
+		latlngset = new google.maps.LatLng(latitude, longitude);
+
+		// Code for generating color of pins
+		var indicator = Math.random() * 100;
     var randomized;
 
     if (indicator < 25) randomized = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
@@ -589,37 +596,24 @@ function initMap() {
     else if (indicator < 75) randomized = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
     else randomized = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
 
-    marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        title: mymarkers[i][0],
-        icon: randomized
-    });
-    // marker.addListener('hover', openInfo(infoWindow));
+	  var marker = new google.maps.Marker({ 
+	  	map: map, 
+	  	title: building, 
+	  	position: latlngset,
+	  	icon: randomized 
+	  });
 
-  //   google.maps.event.addListener(marker,'click', (openInfoContent(marker, i, infowindow))(marker,content,infowindow));  
-		// marker.setMap(map);
-  }
+		var content = building +'</h3>';  
+
+		google.maps.event.addListener(marker,'click', (function(marker, content, infowindow){ 
+			return function() {
+				infowindow.setContent(content);
+				infowindow.open(map,marker);
+			};
+		})(marker, content, infowindow)); 
+
+	}
 }
-
-// function openInfoContent(marker, i, infowindoww) {
-// 	return function() {
-// 		infowindow.setContent(infoWindow[i]);
-// 		infowindow.open(map, marker);
-// 	};
-// }
-
-// function openInfo(infoWindow) {
-// 	infoWindow.open(map, marker);
-// }
-
-// // Allow each marker to have an info window    
-// google.maps.event.addListener(marker, 'click', (function(marker, i) {
-//   return function() {
-//       infoWindow.setContent(infoWindowContent[i][0]);
-//       infoWindow.open(map, marker);
-//   };
-// })(marker, i));
 
 
 function Legend(controlDiv, map) {
